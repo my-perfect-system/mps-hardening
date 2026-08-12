@@ -1,0 +1,25 @@
+---
+- name: "HARDEN_APPARMOR - Install AppArmor profile packages"
+  ansible.builtin.apt:
+    name: "{{ apparmor_packages }}"
+    state: present
+    update_cache: true
+  become: true
+
+- name: "HARDEN_APPARMOR - Deploy AppArmor profiles"
+  ansible.posix.synchronize:
+    src: "{{ role_path }}/files/etc/apparmor.d/"
+    dest: /etc/apparmor.d/
+    delete: false
+    checksum: true
+  become: true
+
+- name: "HARDEN_APPARMOR - Fix AppArmor profile permissions"
+  ansible.builtin.file:
+    path: /etc/apparmor.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+    recurse: true
+  become: true

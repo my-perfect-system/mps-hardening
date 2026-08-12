@@ -1,0 +1,16 @@
+---
+argument_specs:
+  main:
+    short_description: Install AppArmor profile packages and deploy profiles
+    description:
+      - Installs apparmor-utils, apparmor-profiles, and apparmor-profiles-extra.
+      - Deploys AppArmor profiles from the role's files/etc/apparmor.d/ tree to /etc/apparmor.d/.
+    options:
+      apparmor_packages:
+        type: list
+        required: false
+        default:
+          - apparmor-utils
+          - apparmor-profiles
+          - apparmor-profiles-extra
+        description: "Apt packages required for AppArmor profiles"

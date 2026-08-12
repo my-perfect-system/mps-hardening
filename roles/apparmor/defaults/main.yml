@@ -1,0 +1,6 @@
+---
+apparmor_packages:
+  - apparmor-utils
+  - apparmor-profiles
+  - apparmor-profiles-extra
+  - rsync

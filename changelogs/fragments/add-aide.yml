@@ -1,0 +1,5 @@
+---
+minor_changes:
+  - >-
+    aide - install AIDE file integrity scanner and deploy
+    a default exclusions drop-in.

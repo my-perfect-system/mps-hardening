@@ -1,0 +1,34 @@
+---
+namespace: mps
+name: hardening
+version: 0.3.0
+readme: README.md
+authors:
+  - foo <bar@baz.com>
+description: System-level security hardening — firewall, apparmor, auditd
+license:
+  - GPL-3.0-or-later
+tags:
+  - linux
+  - hardening
+  - security
+  - firewall
+  - iptables
+  - apparmor
+  - auditd
+  - aide
+  - mps
+repository: https://github.com/my-perfect-system/mps-hardening
+documentation: https://github.com/my-perfect-system/mps-hardening
+homepage: https://github.com/my-perfect-system/mps-hardening
+issues: https://github.com/my-perfect-system/mps-hardening/issues
+build_ignore:
+  - .git
+  - .github
+  - .gitignore
+  - "*.tar.gz"
+  - .ansible
+dependencies:
+  mps.base: ">=0.1.0"
+  ansible.posix: ">=1.0.0"
+  community.crypto: ">=2.0.0"

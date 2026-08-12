@@ -1,0 +1,58 @@
+---
+argument_specs:
+  main:
+    short_description: Run CIS lockdown benchmarks
+    description:
+      - Clones the ansible-lockdown DEBIAN13-CIS role, generates an SSH keypair,
+        and executes the CIS site.yml playbook locally.
+      - Gated by lockdown_execute (default false). Use lockdown_cis_vars
+        to pass custom CIS variables as a dict; gets written to cis_vars.yml
+        and passed via -e @cis_vars.yml.
+      - Runs once per system, not per-user.
+    options:
+      lockdown_user:
+        type: str
+        required: false
+        default: "deploy"
+        description: "System user to clone repos under and execute the CIS playbook as"
+      lockdown_user_home:
+        type: str
+        required: false
+        default: "/home/deploy"
+        description: "Home directory of the lockdown user"
+      lockdown_repos_dir:
+        type: str
+        required: false
+        default: "/home/deploy/repo/github"
+        description: "Base directory for cloned repositories"
+      lockdown_cis_repo:
+        type: str
+        required: false
+        default: "https://github.com/ansible-lockdown/DEBIAN13-CIS"
+        description: "Git URL for the DEBIAN13-CIS lockdown role"
+      lockdown_cis_version:
+        type: str
+        required: false
+        default: "main"
+        description: "Git ref for the CIS role"
+      lockdown_ssh_port:
+        type: int
+        required: false
+        default: 22
+        description: "SSH port for the inventory template"
+      lockdown_firewall_package:
+        type: str
+        required: false
+        default: iptables
+        choices: [ufw, nftables, iptables]
+        description: "Firewall package for CIS (ufw, nftables, or iptables)"
+      lockdown_execute:
+        type: bool
+        required: false
+        default: false
+        description: "Actually execute the CIS site.yml playbook"
+      lockdown_cis_vars:
+        type: dict
+        required: false
+        default: {}
+        description: "Dict of CIS variables to pass to the role (written to cis_vars.yml and passed via -e @cis_vars.yml)"

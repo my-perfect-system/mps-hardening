@@ -1,0 +1,7 @@
+---
+- name: Lockdown
+  hosts: all
+  become: true
+  roles:
+    - role: mps.hardening.aide
+    - role: mps.hardening.lockdown

@@ -1,0 +1,36 @@
+---
+argument_specs:
+  main:
+    short_description: Install AIDE and deploy an exclusions drop-in
+    description:
+      - Installs the aide and aide-common apt packages.
+      - Ensures the /etc/aide/aide.conf.d/ directory exists.
+      - Renders an exclusions drop-in under /etc/aide/aide.conf.d/.
+    options:
+      aide_packages:
+        type: list
+        required: false
+        default:
+          - aide
+          - aide-common
+        description: "Apt packages required for AIDE"
+      aide_conf_file:
+        type: str
+        required: false
+        default: /etc/aide/aide.conf
+        description: "Path to the main AIDE config file"
+      aide_confd_dir:
+        type: str
+        required: false
+        default: /etc/aide/aide.conf.d
+        description: "Directory holding AIDE drop-in configs"
+      aide_exclusions_file:
+        type: str
+        required: false
+        default: 70_exclusions.conf
+        description: "Filename of the rendered exclusions drop-in"
+      aide_exclusions_path:
+        type: str
+        required: false
+        default: "{{ aide_confd_dir }}/{{ aide_exclusions_file }}"
+        description: "Full path of the rendered exclusions drop-in"

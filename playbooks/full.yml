@@ -1,0 +1,10 @@
+---
+- name: Hardening full install
+  hosts: all
+  become: true
+  roles:
+    - role: mps.hardening.firewall
+    - role: mps.hardening.apparmor
+    - role: mps.hardening.auditd
+    - role: mps.hardening.aide
+    - role: mps.hardening.lockdown

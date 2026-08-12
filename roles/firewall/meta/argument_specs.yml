@@ -1,0 +1,74 @@
+---
+argument_specs:
+  main:
+    short_description: Render iptables rules.v4 and install systemd restore service
+    description:
+      - Installs the iptables package, renders /etc/iptables/rules.v4 from a Jinja2 template,
+        deploys a one-shot systemd service that runs iptables-restore on boot.
+      - Defaults to a safe profile (INPUT DROP, OUTPUT ACCEPT, SSH TCP 22 open, ICMP allowed).
+    options:
+      firewall_packages:
+        type: list
+        required: false
+        default:
+          - iptables
+        description: "Apt packages required for iptables"
+      firewall_policies:
+        type: dict
+        required: false
+        default:
+          input: DROP
+          output: ACCEPT
+          forward: DROP
+        description: "Default chain policies (keys: input, output, forward)"
+      firewall_tcp_ports:
+        type: list
+        required: false
+        default:
+          - "22"
+        description: "TCP destination ports to ACCEPT in NEW state on INPUT"
+      firewall_udp_ports:
+        type: list
+        required: false
+        default: []
+        description: "UDP destination ports to ACCEPT in NEW state on INPUT"
+      firewall_allow_icmp:
+        type: bool
+        required: false
+        default: true
+        description: "ACCEPT ICMP on INPUT and OUTPUT"
+      firewall_rules_dir:
+        type: str
+        required: false
+        default: /etc/iptables
+        description: "Directory where rules.v4 is written"
+      firewall_rules_path:
+        type: str
+        required: false
+        default: "{{ firewall_rules_dir }}/rules.v4"
+        description: "Full path to the rendered rules file"
+      firewall_service_name:
+        type: str
+        required: false
+        default: iptables
+        description: "systemd service name (the unit that calls iptables-restore on boot)"
+      firewall_service_path:
+        type: str
+        required: false
+        default: /etc/systemd/system/{{ firewall_service_name }}.service
+        description: "Full path to the systemd unit file"
+      firewall_nat_enable_ip_forwarding:
+        type: bool
+        required: false
+        default: false
+        description: "Enable IPv4 forwarding + NAT masquerade (off by default)"
+      firewall_nat_out_interface:
+        type: str
+        required: false
+        default: ""
+        description: "WAN interface for NAT masquerade (required when firewall_nat_enable_ip_forwarding is true)"
+      firewall_nat_source_network:
+        type: str
+        required: false
+        default: ""
+        description: "Source network CIDR for NAT masquerade (required when firewall_nat_enable_ip_forwarding is true)"

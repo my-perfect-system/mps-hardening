@@ -1,0 +1,110 @@
+---
+argument_specs:
+  main:
+    short_description: Install auditd apt package and write config + systemd override
+    description:
+      - Installs the auditd package from Debian 13 main (no build from source).
+      - Writes /etc/audit/auditd.conf from a Jinja2 template.
+      - Writes a systemd drop-in at /usr/lib/systemd/system/auditd.service.d/override.conf.
+    options:
+      auditd_packages:
+        type: list
+        required: false
+        default:
+          - auditd
+        description: "Apt packages required for auditd"
+      auditd_log_file:
+        type: str
+        required: false
+        default: /var/log/audit/audit.log
+        description: "Path to the audit log file"
+      auditd_log_format:
+        type: str
+        required: false
+        default: RAW
+        description: "Log format (RAW or ENRICHED)"
+      auditd_flush:
+        type: str
+        required: false
+        default: INCREMENTAL
+        description: "Flush mode (NONE, INCREMENTAL, DATA, SYNC)"
+      auditd_freq:
+        type: int
+        required: false
+        default: 50
+        description: "Flush frequency (when flush=INCREMENTAL/DATA/SYNC)"
+      auditd_max_log_file:
+        type: int
+        required: false
+        default: 8
+        description: "Max log file size in MB before rotation"
+      auditd_max_log_file_action:
+        type: str
+        required: false
+        default: ROTATE
+        choices: [IGNORE, SYSLOG, SUSPEND, ROTATE, KEEP_LOGS]
+        description: "Action when max_log_file reached"
+      auditd_space_left:
+        type: int
+        required: false
+        default: 75
+        description: "Free space left percentage warning threshold"
+      auditd_space_left_action:
+        type: str
+        required: false
+        default: SYSLOG
+        choices: [IGNORE, SYSLOG, EMAIL, SUSPEND, SINGLE, HALT]
+        description: "Action when space_left reached"
+      auditd_admin_space_left:
+        type: int
+        required: false
+        default: 50
+        description: "Admin space left percentage threshold"
+      auditd_admin_space_left_action:
+        type: str
+        required: false
+        default: SUSPEND
+        choices: [IGNORE, SYSLOG, EMAIL, SUSPEND, SINGLE, HALT]
+        description: "Action when admin_space_left reached"
+      auditd_disk_full_action:
+        type: str
+        required: false
+        default: SUSPEND
+        choices: [IGNORE, SYSLOG, SUSPEND, SINGLE, HALT]
+        description: "Action when disk full"
+      auditd_disk_error_action:
+        type: str
+        required: false
+        default: SUSPEND
+        choices: [IGNORE, SYSLOG, SUSPEND, SINGLE, HALT]
+        description: "Action on disk error"
+      auditd_run_dir:
+        type: str
+        required: false
+        default: /var/run/audit
+        description: "Runtime directory for auditd"
+      auditd_rules_dir:
+        type: str
+        required: false
+        default: /etc/audit/rules.d
+        description: "Directory for audit rules"
+      auditd_config_path:
+        type: str
+        required: false
+        default: /etc/audit/auditd.conf
+        description: "Path to the auditd config file"
+      auditd_override_dir:
+        type: str
+        required: false
+        default: /usr/lib/systemd/system/auditd.service.d
+        description: "systemd drop-in directory for auditd.service"
+      auditd_override_path:
+        type: str
+        required: false
+        default: "{{ auditd_override_dir }}/override.conf"
+        description: "Path to the auditd systemd drop-in file"
+      auditd_localstatedir:
+        type: str
+        required: false
+        default: /var
+        description: "Override localstatedir in the auditd systemd unit (matches source)"
