@@ -1,0 +1,7 @@
+---
+# Fragment for the refactor pass.
+# Compiles into changelogs/changelog.yaml at release time.
+minor_changes:
+  - |
+    `auditd` override moved from `templates/usr/lib/systemd/system/auditd.service.d/override.conf.j2` (templated, 1 Jinja var with fixed default `/var`) to `files/usr/lib/systemd/system/auditd.service.d/override.conf` (static). `template:` → `copy:` in `tasks/main.yml`. Deleted the now-empty `templates/usr/` tree.
+
