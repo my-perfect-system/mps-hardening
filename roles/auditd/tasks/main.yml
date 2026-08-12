@@ -1,12 +1,12 @@
 ---
-- name: "HARDEN_AUDITD - Install auditd package"
+- name: Install auditd packages
   ansible.builtin.apt:
     name: "{{ auditd_packages }}"
     state: present
     update_cache: true
   become: true
 
-- name: "HARDEN_AUDITD - Ensure /etc/audit/rules.d exists"
+- name: Ensure auditd rules directory exists
   ansible.builtin.file:
     path: "{{ auditd_rules_dir }}"
     state: directory
@@ -15,7 +15,7 @@
     mode: "0755"
   become: true
 
-- name: "HARDEN_AUDITD - Ensure /var/run/audit exists"
+- name: Ensure auditd run directory exists
   ansible.builtin.file:
     path: "{{ auditd_run_dir }}"
     state: directory
@@ -24,7 +24,7 @@
     mode: "0755"
   become: true
 
-- name: "HARDEN_AUDITD - Render /etc/audit/auditd.conf"
+- name: Render auditd configuration
   ansible.builtin.template:
     src: etc/audit/auditd.conf.j2
     dest: "{{ auditd_config_path }}"
@@ -33,7 +33,7 @@
     mode: "0644"
   become: true
 
-- name: "HARDEN_AUDITD - Ensure auditd systemd drop-in directory exists"
+- name: Ensure auditd service override directory exists
   ansible.builtin.file:
     path: "{{ auditd_override_dir }}"
     state: directory
@@ -42,7 +42,7 @@
     mode: "0755"
   become: true
 
-- name: "HARDEN_AUDITD - Render auditd systemd drop-in"
+- name: Render auditd service override
   ansible.builtin.template:
     src: usr/lib/systemd/system/auditd.service.d/override.conf.j2
     dest: "{{ auditd_override_path }}"

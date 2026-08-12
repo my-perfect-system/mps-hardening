@@ -1,12 +1,12 @@
 ---
-- name: "HARDEN_AIDE - Install AIDE package"
+- name: Install aide packages
   ansible.builtin.apt:
     name: "{{ aide_packages }}"
     state: present
     update_cache: true
   become: true
 
-- name: "HARDEN_AIDE - Ensure /etc/aide/aide.conf.d exists"
+- name: Ensure aide conf.d directory exists
   ansible.builtin.file:
     path: "{{ aide_confd_dir }}"
     state: directory
@@ -15,7 +15,7 @@
     mode: "0755"
   become: true
 
-- name: "HARDEN_AIDE - Render AIDE exclusions drop-in"
+- name: Render AIDE exclusions configuration
   ansible.builtin.template:
     src: etc/aide/aide.conf.d/70_exclusions.conf.j2
     dest: "{{ aide_exclusions_path }}"

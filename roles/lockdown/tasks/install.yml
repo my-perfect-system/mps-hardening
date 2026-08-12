@@ -1,11 +1,11 @@
 ---
-- name: LOCKDOWN - Install build tools
+- name: Install cracklib-runtime package
   ansible.builtin.package:
     name:
       - cracklib-runtime
     state: present
 
-- name: "LOCKDOWN - Ensure repo directory exists"
+- name: Ensure lockdown repos directory exists
   ansible.builtin.file:
     path: "{{ lockdown_repos_dir }}"
     state: directory
@@ -15,7 +15,7 @@
   become: true
   become_user: "{{ lockdown_user }}"
 
-- name: "LOCKDOWN - Clone CIS lockdown role"
+- name: Clone DEBIAN13-CIS repository
   ansible.builtin.git:
     repo: "{{ lockdown_cis_repo }}"
     dest: "{{ lockdown_repos_dir }}/DEBIAN13-CIS"
@@ -24,7 +24,7 @@
   become: true
   become_user: "{{ lockdown_user }}"
 
-- name: "LOCKDOWN - Create inventory directory"
+- name: Ensure CIS inventory directory exists
   ansible.builtin.file:
     path: "{{ lockdown_repos_dir }}/DEBIAN13-CIS/inventory"
     state: directory
@@ -34,7 +34,7 @@
   become: true
   become_user: "{{ lockdown_user }}"
 
-- name: "LOCKDOWN - Render inventory file"
+- name: Render CIS inventory hosts file
   ansible.builtin.template:
     src: hosts.j2
     dest: "{{ lockdown_repos_dir }}/DEBIAN13-CIS/inventory/hosts"
@@ -44,13 +44,13 @@
   become: true
   become_user: "{{ lockdown_user }}"
 
-- name: "LOCKDOWN - Install ansible package"
+- name: Install ansible package
   ansible.builtin.apt:
     name:
       - ansible
     state: present
 
-- name: "LOCKDOWN - Ensure .ssh directory exists"
+- name: Ensure lockdown user .ssh directory exists
   ansible.builtin.file:
     path: "{{ lockdown_user_home }}/.ssh"
     state: directory
@@ -59,7 +59,7 @@
     mode: "0700"
   become: true
 
-- name: "LOCKDOWN - Generate SSH keypair"
+- name: Generate lockdown user SSH keypair
   community.crypto.openssh_keypair:
     path: "{{ lockdown_user_home }}/.ssh/id_rsa"
     type: rsa
@@ -70,18 +70,18 @@
     force: true
   become: true
 
-- name: "LOCKDOWN - Read public key"
+- name: Read lockdown user public SSH key
   ansible.builtin.slurp:
     src: "{{ lockdown_user_home }}/.ssh/id_rsa.pub"
   register: lockdown_pubkey
 
-- name: "LOCKDOWN - Authorize own key"
+- name: Authorize lockdown user SSH key for itself
   ansible.posix.authorized_key:
     user: "{{ lockdown_user }}"
     key: "{{ lockdown_pubkey['content'] | b64decode }}"
   become: true
 
-- name: "LOCKDOWN - Add deploy user to CIS nopasswd list"
+- name: Add lockdown user to CIS sudoers nopasswd list
   ansible.builtin.lineinfile:
     path: "{{ lockdown_repos_dir }}/DEBIAN13-CIS/defaults/main.yml"
     insertafter: '^deb13cis_sudoers_exclude_nopasswd_list:'
@@ -89,7 +89,7 @@
   become: true
   become_user: "{{ lockdown_user }}"
 
-- name: "LOCKDOWN - Add admin group to CIS nopasswd list"
+- name: Add admin group to CIS sudoers nopasswd list
   ansible.builtin.lineinfile:
     path: "{{ lockdown_repos_dir }}/DEBIAN13-CIS/defaults/main.yml"
     insertafter: '^deb13cis_sudoers_exclude_nopasswd_list:'
@@ -97,7 +97,7 @@
   become: true
   become_user: "{{ lockdown_user }}"
 
-- name: "LOCKDOWN - Extend AIDE async timeout"
+- name: Override CIS AIDE init async threshold
   ansible.builtin.lineinfile:
     path: "{{ lockdown_repos_dir }}/DEBIAN13-CIS/defaults/main.yml"
     regexp: '^deb13cis_aide_init_async:'
@@ -105,7 +105,7 @@
   become: true
   become_user: "{{ lockdown_user }}"
 
-- name: "LOCKDOWN - Keep X server for desktop systems"
+- name: Enable X window server in CIS defaults
   ansible.builtin.lineinfile:
     path: "{{ lockdown_repos_dir }}/DEBIAN13-CIS/defaults/main.yml"
     regexp: '^deb13cis_xwindow_server:'
@@ -113,7 +113,7 @@
   become: true
   become_user: "{{ lockdown_user }}"
 
-- name: "LOCKDOWN - Set CIS firewall package"
+- name: Override CIS firewall package
   ansible.builtin.lineinfile:
     path: "{{ lockdown_repos_dir }}/DEBIAN13-CIS/defaults/main.yml"
     regexp: '^deb13cis_firewall_package:'
@@ -121,7 +121,7 @@
   become: true
   become_user: "{{ lockdown_user }}"
 
-- name: "LOCKDOWN - Set sugroup to 'sudo'"
+- name: Override CIS sugroup to sudo
   ansible.builtin.lineinfile:
     path: "{{ lockdown_repos_dir }}/DEBIAN13-CIS/defaults/main.yml"
     regexp: '^deb13cis_sugroup:'
@@ -129,7 +129,7 @@
   become: true
   become_user: "{{ lockdown_user }}"
 
-- name: "LOCKDOWN - Run CIS site.yml playbook (async, survives sshd restart)"
+- name: Execute CIS lockdown playbook when enabled
   ansible.builtin.shell: |
     /usr/bin/ansible-playbook -i inventory/hosts site.yml -v
   args:

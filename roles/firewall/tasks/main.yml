@@ -1,12 +1,12 @@
 ---
-- name: "HARDEN_FIREWALL - Install iptables package"
+- name: Install firewall packages
   ansible.builtin.apt:
     name: "{{ firewall_packages }}"
     state: present
     update_cache: true
   become: true
 
-- name: "HARDEN_FIREWALL - Ensure /etc/iptables directory exists"
+- name: Ensure firewall rules directory exists
   ansible.builtin.file:
     path: "{{ firewall_rules_dir }}"
     state: directory
@@ -15,7 +15,7 @@
     mode: "0755"
   become: true
 
-- name: "HARDEN_FIREWALL - Render /etc/iptables/rules.v4"
+- name: Render iptables v4 rules
   ansible.builtin.template:
     src: etc/iptables/rules.v4.j2
     dest: "{{ firewall_rules_path }}"
@@ -24,7 +24,7 @@
     mode: "0644"
   become: true
 
-- name: "HARDEN_FIREWALL - Configure net.ipv4.ip_forward via sysctl"
+- name: Configure net.ipv4.ip_forward for NAT
   ansible.posix.sysctl:
     name: net.ipv4.ip_forward
     value: "{{ '1' if firewall_enable_nat_ip_forwarding else '0' }}"
@@ -33,7 +33,7 @@
   become: true
   when: firewall_enable_nat_ip_forwarding
 
-- name: "HARDEN_FIREWALL - Deploy iptables-restore systemd service"
+- name: Render iptables systemd service unit
   ansible.builtin.template:
     src: etc/systemd/system/iptables.service.j2
     dest: "{{ firewall_service_path }}"
@@ -42,7 +42,7 @@
     mode: "0644"
   become: true
 
-- name: "HARDEN_FIREWALL - Enable and start iptables service"
+- name: Enable and start iptables service
   ansible.builtin.systemd:
     name: "{{ firewall_service_name }}"
     enabled: true
