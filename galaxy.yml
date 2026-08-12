@@ -23,6 +23,8 @@ documentation: https://github.com/my-perfect-system/mps-hardening
 homepage: https://github.com/my-perfect-system/mps-hardening
 issues: https://github.com/my-perfect-system/mps-hardening/issues
 build_ignore:
+  .ansible-lint
+  .yamllint
   - .git
   - .github
   - .gitignore
