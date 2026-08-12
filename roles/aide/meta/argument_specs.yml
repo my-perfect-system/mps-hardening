@@ -14,11 +14,6 @@ argument_specs:
           - aide
           - aide-common
         description: "Apt packages required for AIDE"
-      aide_conf_file:
-        type: str
-        required: false
-        default: /etc/aide/aide.conf
-        description: "Path to the main AIDE config file"
       aide_confd_dir:
         type: str
         required: false

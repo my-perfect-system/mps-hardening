@@ -5,9 +5,7 @@ argument_specs:
     description:
       - Clones the ansible-lockdown DEBIAN13-CIS role, generates an SSH keypair,
         and executes the CIS site.yml playbook locally.
-      - Gated by lockdown_enable_execute (default false). Use lockdown_cis_vars
-        to pass custom CIS variables as a dict; gets written to cis_vars.yml
-        and passed via -e @cis_vars.yml.
+      - Gated by lockdown_enable_execute (default false).
       - Runs once per system, not per-user.
     options:
       lockdown_user:
@@ -35,11 +33,6 @@ argument_specs:
         required: false
         default: "main"
         description: "Git ref for the CIS role"
-      lockdown_ssh_port:
-        type: int
-        required: false
-        default: 22
-        description: "SSH port for the inventory template"
       lockdown_firewall_package:
         type: str
         required: false
@@ -51,8 +44,3 @@ argument_specs:
         required: false
         default: false
         description: "Actually execute the CIS site.yml playbook"
-      lockdown_cis_vars:
-        type: dict
-        required: false
-        default: {}
-        description: "Dict of CIS variables to pass to the role (written to cis_vars.yml and passed via -e @cis_vars.yml)"
