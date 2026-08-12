@@ -1,6 +1,6 @@
 ---
 - name: Install apparmor packages
-  ansible.builtin.apt:
+  ansible.builtin.package:
     name: "{{ apparmor_packages }}"
     state: present
     update_cache: true

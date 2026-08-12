@@ -45,7 +45,7 @@
   become_user: "{{ lockdown_user }}"
 
 - name: Install ansible package
-  ansible.builtin.apt:
+  ansible.builtin.package:
     name:
       - ansible
     state: present

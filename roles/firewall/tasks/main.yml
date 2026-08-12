@@ -1,6 +1,6 @@
 ---
 - name: Install firewall packages
-  ansible.builtin.apt:
+  ansible.builtin.package:
     name: "{{ firewall_packages }}"
     state: present
     update_cache: true

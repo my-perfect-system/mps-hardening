@@ -1,6 +1,6 @@
 ---
 - name: Install aide packages
-  ansible.builtin.apt:
+  ansible.builtin.package:
     name: "{{ aide_packages }}"
     state: present
     update_cache: true

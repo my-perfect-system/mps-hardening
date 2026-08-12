@@ -1,6 +1,6 @@
 ---
 - name: Install auditd packages
-  ansible.builtin.apt:
+  ansible.builtin.package:
     name: "{{ auditd_packages }}"
     state: present
     update_cache: true
