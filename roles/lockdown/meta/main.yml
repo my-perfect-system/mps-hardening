@@ -16,5 +16,5 @@ galaxy_info:
     - security
     - cis
     - lockdown
-    - mps-hardening
+    - odem-hardening
 dependencies: []

@@ -15,5 +15,5 @@ galaxy_info:
     - hardening
     - apparmor
     - security
-    - mps-hardening
+    - odem-hardening
 dependencies: []

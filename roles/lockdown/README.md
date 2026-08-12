@@ -1,10 +1,10 @@
 ---
-namespace: mps
+namespace: odem
 collection: hardening
 role: lockdown
 ---
 
-# `mps.hardening.lockdown`
+# `odem.hardening.lockdown`
 
 Run CIS lockdown benchmarks
 
@@ -29,7 +29,7 @@ None.
 ```yaml
 - hosts: all
   roles:
-    - mps.hardening.lockdown
+    - odem.hardening.lockdown
 ```
 
 ## Role metadata

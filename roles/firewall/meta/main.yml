@@ -16,5 +16,5 @@ galaxy_info:
     - firewall
     - iptables
     - security
-    - mps-hardening
+    - odem-hardening
 dependencies: []

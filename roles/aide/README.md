@@ -1,10 +1,10 @@
 ---
-namespace: mps
+namespace: odem
 collection: hardening
 role: aide
 ---
 
-# `mps.hardening.aide`
+# `odem.hardening.aide`
 
 Install AIDE and deploy an exclusions drop-in
 
@@ -26,7 +26,7 @@ None.
 ```yaml
 - hosts: all
   roles:
-    - mps.hardening.aide
+    - odem.hardening.aide
 ```
 
 ## Role metadata

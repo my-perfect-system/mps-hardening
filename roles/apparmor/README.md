@@ -1,10 +1,10 @@
 ---
-namespace: mps
+namespace: odem
 collection: hardening
 role: apparmor
 ---
 
-# `mps.hardening.apparmor`
+# `odem.hardening.apparmor`
 
 Install AppArmor profile packages and deploy profiles
 
@@ -23,7 +23,7 @@ None.
 ```yaml
 - hosts: all
   roles:
-    - mps.hardening.apparmor
+    - odem.hardening.apparmor
 ```
 
 ## Role metadata

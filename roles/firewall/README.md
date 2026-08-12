@@ -1,10 +1,10 @@
 ---
-namespace: mps
+namespace: odem
 collection: hardening
 role: firewall
 ---
 
-# `mps.hardening.firewall`
+# `odem.hardening.firewall`
 
 Render iptables rules.v4 and install systemd restore service
 
@@ -34,7 +34,7 @@ None.
 ```yaml
 - hosts: all
   roles:
-    - mps.hardening.firewall
+    - odem.hardening.firewall
 ```
 
 ## Role metadata

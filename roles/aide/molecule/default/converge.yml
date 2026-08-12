@@ -12,4 +12,4 @@
     users_list:
       - name: molecule_user
   roles:
-    - role: mps.hardening.aide
+    - role: odem.hardening.aide

@@ -1,10 +1,10 @@
 ---
-namespace: mps
+namespace: odem
 collection: hardening
 role: auditd
 ---
 
-# `mps.hardening.auditd`
+# `odem.hardening.auditd`
 
 Install auditd apt package and write config + systemd override
 
@@ -41,7 +41,7 @@ None.
 ```yaml
 - hosts: all
   roles:
-    - mps.hardening.auditd
+    - odem.hardening.auditd
 ```
 
 ## Role metadata

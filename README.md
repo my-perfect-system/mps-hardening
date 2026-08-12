@@ -1,4 +1,4 @@
-# `mps.hardening` Ansible Collection
+# `odem.hardening` Ansible Collection
 
 System-level security hardening — firewall (iptables), apparmor
 profiles, auditd, AIDE intrusion detection, CIS lockdown (clones
@@ -6,10 +6,10 @@ profiles, auditd, AIDE intrusion detection, CIS lockdown (clones
 
 ## Galaxy metadata
 
-- **namespace**: `mps`
+- **namespace**: `odem`
 - **name**: `hardening`
 - **version**: `0.3.1`
-- **dependencies**: `mps.base`, `ansible.posix`, `community.crypto`
+- **dependencies**: `odem.base`, `ansible.posix`, `community.crypto`
 
 See [`galaxy.yml`](galaxy.yml) for the canonical values.
 
@@ -17,16 +17,16 @@ See [`galaxy.yml`](galaxy.yml) for the canonical values.
 
 | Role | Purpose |
 |---|---|
-| [`mps.hardening.firewall`](roles/firewall/README.md) | iptables rules (templated with port ranges, ICMP, NAT). |
-| [`mps.hardening.apparmor`](roles/apparmor/README.md) | Apparmor profile sync + enforce. |
-| [`mps.hardening.auditd`](roles/auditd/README.md) | auditd + auditd.conf + systemd override. |
-| [`mps.hardening.aide`](roles/aide/README.md) | AIDE intrusion detection. |
-| [`mps.hardening.lockdown`](roles/lockdown/README.md) | DEBIAN13-CIS clone + sub-playbook invocation (gated by `lockdown_enable_execute`). |
+| [`odem.hardening.firewall`](roles/firewall/README.md) | iptables rules (templated with port ranges, ICMP, NAT). |
+| [`odem.hardening.apparmor`](roles/apparmor/README.md) | Apparmor profile sync + enforce. |
+| [`odem.hardening.auditd`](roles/auditd/README.md) | auditd + auditd.conf + systemd override. |
+| [`odem.hardening.aide`](roles/aide/README.md) | AIDE intrusion detection. |
+| [`odem.hardening.lockdown`](roles/lockdown/README.md) | DEBIAN13-CIS clone + sub-playbook invocation (gated by `lockdown_enable_execute`). |
 
 ## Installation
 
 ```bash
-ansible-galaxy collection install mps.hardening
+ansible-galaxy collection install odem.hardening
 ansible-galaxy collection install community.crypto
 ```
 
@@ -36,11 +36,11 @@ ansible-galaxy collection install community.crypto
 - hosts: all
   become: true
   roles:
-    - mps.hardening.firewall
-    - mps.hardening.apparmor
-    - mps.hardening.auditd
-    - mps.hardening.aide
-    - mps.hardening.lockdown
+    - odem.hardening.firewall
+    - odem.hardening.apparmor
+    - odem.hardening.auditd
+    - odem.hardening.aide
+    - odem.hardening.lockdown
 ```
 
 ## Caveats
