@@ -6,4 +6,4 @@ lockdown_repos_dir: "{{ lockdown_user_home }}/repo/github"
 lockdown_cis_repo: "https://github.com/ansible-lockdown/DEBIAN13-CIS"
 lockdown_cis_version: "main"
 lockdown_firewall_package: iptables
-lockdown_execute: false
+lockdown_enable_execute: false

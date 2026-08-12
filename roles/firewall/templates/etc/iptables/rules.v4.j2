@@ -5,7 +5,7 @@
 :OUTPUT {{ firewall_policies.output }} [0:0]
 -A INPUT -i lo -j ACCEPT
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-{% if firewall_allow_icmp %}
+{% if firewall_enable_icmp %}
 -A INPUT -p icmp -j ACCEPT
 {% endif %}
 {% for port in firewall_tcp_ports %}
@@ -15,7 +15,7 @@
 -A INPUT -p udp --dport {{ port }} -m state --state NEW -j ACCEPT
 {% endfor %}
 COMMIT
-{% if firewall_nat_enable_ip_forwarding %}
+{% if firewall_enable_nat_ip_forwarding %}
 *nat
 :PREROUTING ACCEPT [0:0]
 :INPUT ACCEPT [0:0]

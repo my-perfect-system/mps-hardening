@@ -144,4 +144,4 @@
       -o UserKnownHostsFile=/dev/null
   become: true
   become_user: "{{ lockdown_user }}"
-  when: lockdown_execute | bool
+  when: lockdown_enable_execute | bool

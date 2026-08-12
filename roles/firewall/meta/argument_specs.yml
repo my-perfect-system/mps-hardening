@@ -32,7 +32,7 @@ argument_specs:
         required: false
         default: []
         description: "UDP destination ports to ACCEPT in NEW state on INPUT"
-      firewall_allow_icmp:
+      firewall_enable_icmp:
         type: bool
         required: false
         default: true
@@ -57,7 +57,7 @@ argument_specs:
         required: false
         default: /etc/systemd/system/{{ firewall_service_name }}.service
         description: "Full path to the systemd unit file"
-      firewall_nat_enable_ip_forwarding:
+      firewall_enable_nat_ip_forwarding:
         type: bool
         required: false
         default: false
@@ -66,9 +66,9 @@ argument_specs:
         type: str
         required: false
         default: ""
-        description: "WAN interface for NAT masquerade (required when firewall_nat_enable_ip_forwarding is true)"
+        description: "WAN interface for NAT masquerade (required when firewall_enable_nat_ip_forwarding is true)"
       firewall_nat_source_network:
         type: str
         required: false
         default: ""
-        description: "Source network CIDR for NAT masquerade (required when firewall_nat_enable_ip_forwarding is true)"
+        description: "Source network CIDR for NAT masquerade (required when firewall_enable_nat_ip_forwarding is true)"

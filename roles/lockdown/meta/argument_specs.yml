@@ -5,7 +5,7 @@ argument_specs:
     description:
       - Clones the ansible-lockdown DEBIAN13-CIS role, generates an SSH keypair,
         and executes the CIS site.yml playbook locally.
-      - Gated by lockdown_execute (default false). Use lockdown_cis_vars
+      - Gated by lockdown_enable_execute (default false). Use lockdown_cis_vars
         to pass custom CIS variables as a dict; gets written to cis_vars.yml
         and passed via -e @cis_vars.yml.
       - Runs once per system, not per-user.
@@ -46,7 +46,7 @@ argument_specs:
         default: iptables
         choices: [ufw, nftables, iptables]
         description: "Firewall package for CIS (ufw, nftables, or iptables)"
-      lockdown_execute:
+      lockdown_enable_execute:
         type: bool
         required: false
         default: false

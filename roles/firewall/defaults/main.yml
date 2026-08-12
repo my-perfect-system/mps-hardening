@@ -8,11 +8,11 @@ firewall_policies:
 firewall_tcp_ports:
   - "22"
 firewall_udp_ports: []
-firewall_allow_icmp: true
+firewall_enable_icmp: true
 firewall_rules_dir: /etc/iptables
 firewall_rules_path: "{{ firewall_rules_dir }}/rules.v4"
 firewall_service_name: iptables
 firewall_service_path: /etc/systemd/system/{{ firewall_service_name }}.service
-firewall_nat_enable_ip_forwarding: false
+firewall_enable_nat_ip_forwarding: false
 firewall_nat_out_interface: ""
 firewall_nat_source_network: ""
