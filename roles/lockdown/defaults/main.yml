@@ -1,9 +1,19 @@
 ---
+
+# Feature toggles — naming pattern: <rolename>_enable_<feature>
+
+lockdown_enable_execute: false
+
+# Regular configuration
+
 lockdown_user: "{{ ansible_user }}"
+
 lockdown_user_home: "/home/{{ lockdown_user }}"
 
 lockdown_repos_dir: "{{ lockdown_user_home }}/repo/github"
+
 lockdown_cis_repo: "https://github.com/ansible-lockdown/DEBIAN13-CIS"
+
 lockdown_cis_version: "main"
+
 lockdown_firewall_package: iptables
-lockdown_enable_execute: false
