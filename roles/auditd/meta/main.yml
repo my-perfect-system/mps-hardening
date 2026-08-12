@@ -2,7 +2,7 @@
 galaxy_info:
   author: foo <bar@baz.com>
   description: "Configure auditd auditing daemon"
-  min_ansible_version: "2.20.0"
+  min_ansible_version: "2.16.0"
   license: GPL-3.0-or-later
   platforms:
     - name: Debian
