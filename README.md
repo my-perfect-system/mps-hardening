@@ -17,11 +17,11 @@ See [`galaxy.yml`](galaxy.yml) for the canonical values.
 
 | Role | Purpose |
 |---|---|
-| `mps.hardening.firewall` | iptables rules (templated with port ranges, ICMP, NAT). |
-| `mps.hardening.apparmor` | Apparmor profile sync + enforce. |
-| `mps.hardening.auditd` | auditd + auditd.conf + systemd override. |
-| `mps.hardening.aide` | AIDE intrusion detection. |
-| `mps.hardening.lockdown` | DEBIAN13-CIS clone + sub-playbook invocation (gated by `lockdown_enable_execute`). |
+| [`mps.hardening.firewall`](roles/firewall/README.md) | iptables rules (templated with port ranges, ICMP, NAT). |
+| [`mps.hardening.apparmor`](roles/apparmor/README.md) | Apparmor profile sync + enforce. |
+| [`mps.hardening.auditd`](roles/auditd/README.md) | auditd + auditd.conf + systemd override. |
+| [`mps.hardening.aide`](roles/aide/README.md) | AIDE intrusion detection. |
+| [`mps.hardening.lockdown`](roles/lockdown/README.md) | DEBIAN13-CIS clone + sub-playbook invocation (gated by `lockdown_enable_execute`). |
 
 ## Installation
 
