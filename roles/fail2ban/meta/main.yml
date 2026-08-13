@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: foo <bar@baz.com>
+  description: "Install fail2ban and configure the default sshd jail"
+  min_ansible_version: "2.16.0"
+  license: GPL-3.0-or-later
+  platforms:
+    - name: Debian
+      versions:
+        - trixie
+  galaxy_tags:
+    - debian
+    - debian13
+    - trixie
+    - hardening
+    - fail2ban
+    - ssh
+    - intrusion-prevention
+    - security
+    - odem-hardening
+dependencies: []

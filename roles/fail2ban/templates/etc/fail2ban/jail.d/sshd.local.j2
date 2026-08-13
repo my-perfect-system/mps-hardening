@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+[sshd]
+enabled  = {{ fail2ban_sshd_enabled | bool | string | lower }}
+backend  = {{ fail2ban_sshd_backend }}
+port     = {{ fail2ban_sshd_port }}
+logpath  = {{ fail2ban_sshd_logpath }}
+maxretry = {{ fail2ban_sshd_maxretry }}
+findtime = {{ fail2ban_sshd_findtime }}
+bantime  = {{ fail2ban_sshd_bantime }}

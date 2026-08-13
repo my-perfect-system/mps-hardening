@@ -1,0 +1,85 @@
+---
+argument_specs:
+  main:
+    short_description: Install fail2ban and enable the default sshd jail
+    description:
+      - Installs the fail2ban package from Debian 13 main.
+      - Writes umbrella jail.local with systemd backend and jail.d/ include.
+      - Writes jail.d/sshd.local for SSH brute-force protection.
+      - Enables and starts the fail2ban service.
+    options:
+      fail2ban_enable_service:
+        type: bool
+        required: false
+        default: true
+        description: "Toggle to install and run fail2ban entirely"
+      fail2ban_packages:
+        type: list
+        required: false
+        default:
+          - fail2ban
+        description: "Apt packages required for fail2ban"
+      fail2ban_jail_dir:
+        type: str
+        required: false
+        default: /etc/fail2ban
+        description: "Root directory for fail2ban configuration"
+      fail2ban_jail_local_path:
+        type: str
+        required: false
+        default: "{{ fail2ban_jail_dir }}/jail.local"
+        description: "Path to the umbrella jail.local file"
+      fail2ban_jail_d_dir:
+        type: str
+        required: false
+        default: "{{ fail2ban_jail_dir }}/jail.d"
+        description: "Directory for per-jail drop-in configs"
+      fail2ban_jail_sshd_path:
+        type: str
+        required: false
+        default: "{{ fail2ban_jail_d_dir }}/sshd.local"
+        description: "Path to the sshd jail drop-in"
+      fail2ban_sshd_enabled:
+        type: bool
+        required: false
+        default: true
+        description: "Enable the sshd jail"
+      fail2ban_sshd_backend:
+        type: str
+        required: false
+        default: systemd
+        choices:
+          - systemd
+          - polling
+          - auto
+        description: "fail2ban backend for log monitoring"
+      fail2ban_sshd_port:
+        type: str
+        required: false
+        default: ssh
+        description: "Port or service name for the sshd jail"
+      fail2ban_sshd_logpath:
+        type: str
+        required: false
+        default: /var/log/auth.log
+        description: "Log path monitored by the sshd jail"
+      fail2ban_sshd_maxretry:
+        type: int
+        required: false
+        default: 5
+        description: "Max retries before ban"
+      fail2ban_sshd_findtime:
+        type: int
+        required: false
+        default: 600
+        description: "Detection window in seconds"
+      fail2ban_sshd_bantime:
+        type: int
+        required: false
+        default: 600
+        description: "Ban duration in seconds"
+      fail2ban_service_name:
+        type: str
+        required: false
+        default: fail2ban
+        description: "systemd service name for fail2ban"

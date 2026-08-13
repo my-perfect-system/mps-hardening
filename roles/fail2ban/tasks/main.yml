@@ -1,0 +1,45 @@
+---
+- block:
+    - name: Install fail2ban packages
+      ansible.builtin.package:
+        name: "{{ fail2ban_packages }}"
+        state: present
+        update_cache: true
+      become: true
+
+    - name: Ensure fail2ban jail.d directory exists
+      ansible.builtin.file:
+        path: "{{ fail2ban_jail_d_dir }}"
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+      become: true
+
+    - name: Render fail2ban umbrella jail.local
+      ansible.builtin.template:
+        src: etc/fail2ban/jail.local.j2
+        dest: "{{ fail2ban_jail_local_path }}"
+        owner: root
+        group: root
+        mode: "0644"
+      become: true
+
+    - name: Render sshd jail drop-in
+      ansible.builtin.template:
+        src: etc/fail2ban/jail.d/sshd.local.j2
+        dest: "{{ fail2ban_jail_sshd_path }}"
+        owner: root
+        group: root
+        mode: "0644"
+      become: true
+
+    - name: Enable and start fail2ban service
+      ansible.builtin.systemd:
+        name: "{{ fail2ban_service_name }}"
+        enabled: true
+        state: started
+        daemon_reload: true
+      become: true
+
+  when: fail2ban_enable_service

@@ -1,0 +1,8 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  tasks:
+    - name: Converge completed successfully
+      ansible.builtin.debug:
+        msg: "Smoke test for odem.hardening.fail2ban passed (converge ran without error)."

@@ -22,6 +22,7 @@ See [`galaxy.yml`](galaxy.yml) for the canonical values.
 | [`odem.hardening.auditd`](roles/auditd/README.md) | auditd + auditd.conf + systemd override. |
 | [`odem.hardening.aide`](roles/aide/README.md) | AIDE intrusion detection. |
 | [`odem.hardening.lockdown`](roles/lockdown/README.md) | DEBIAN13-CIS clone + sub-playbook invocation (gated by `lockdown_enable_execute`). |
+| [`odem.hardening.fail2ban`](roles/fail2ban/README.md) | Fail2ban with default sshd jail to prevent SSH brute-force attacks. |
 
 ## Installation
 
@@ -41,6 +42,7 @@ ansible-galaxy collection install community.crypto
     - odem.hardening.auditd
     - odem.hardening.aide
     - odem.hardening.lockdown
+    - odem.hardening.fail2ban
 ```
 
 ## Caveats

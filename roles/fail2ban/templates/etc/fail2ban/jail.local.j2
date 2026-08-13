@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+[DEFAULT]
+backend = {{ fail2ban_sshd_backend }}
+
+# Read per-jail drop-ins from jail.d/
+before = jail.d/*.local

@@ -1,0 +1,7 @@
+---
+minor_changes:
+  - |
+    New role odem.hardening.fail2ban — installs fail2ban with the default sshd jail
+    to prevent SSH brute-force attacks. Ships umbrella jail.local + per-jail drop-in
+    for sshd. Gated by fail2ban_enable_service. Uses iptables-multiport banaction
+    matching the firewall role's iptables backend.

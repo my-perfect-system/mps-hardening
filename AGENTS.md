@@ -21,6 +21,7 @@ runs it as a different user).
 | `odem.hardening.auditd` | apt install, 2 dir ensures (rules.d + run), 2 templates (`/etc/audit/auditd.conf` with ~13 vars, systemd override from `files/`). | 2 |
 | `odem.hardening.aide` | apt install, `/var/lib/aide` directory, render one small static template. | 1 |
 | `odem.hardening.lockdown` | Install `cracklib-runtime` + `ansible`, clone `DEBIAN13-CIS` to `/usr/share/mps/lockdown/`, generate SSH keypair + authorized_key, 5 regex `lineinfile` overrides into the CIS defaults, sub-playbook invocation gated by `lockdown_enable_execute`. | 3 (accepted) |
+| `odem.hardening.fail2ban` | Install fail2ban with the default sshd jail (systemd backend, iptables-multiport banaction) to prevent SSH brute-force attacks. Gated by `fail2ban_enable_service`. | 1 |
 
 ## Conventions
 

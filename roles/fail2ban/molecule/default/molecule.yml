@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+  enabled: false
+
+driver:
+  name: docker
+
+platforms:
+  - name: odem-hardening-fail2ban
+    image: geerlingguy/docker-debian13-ansible:latest
+    privileged: false
+    pre_build_image: false
+    command: /bin/sh -c "while true; do sleep 1000; done"
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: converge.yml
+  inventory:
+    group_vars:
+      all:
+        ansible_user: root
+
+verifier:
+  name: ansible
+  playbooks:
+    verify: verify.yml
